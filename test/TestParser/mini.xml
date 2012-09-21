@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<resultset statement="select METAR_EKCH_METAR.observed, METAR_EKCH_METAR.value, METAR_EKCH_TEMPERATUR.value, METAR_EKCH_DAGGPUNKT.value, METAR_EKCH_LUFTTRYCK.value from METAR_EKCH_LUFTTRYCK, METAR_EKCH_METAR, METAR_EKCH_TEMPERATUR, METAR_EKCH_DAGGPUNKT where METAR_EKCH_METAR.observed = METAR_EKCH_TEMPERATUR.observed AND METAR_EKCH_METAR.observed = METAR_EKCH_DAGGPUNKT.observed AND METAR_EKCH_METAR.observed = METAR_EKCH_LUFTTRYCK.observed
+" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <row>
+	<field name="observed">2004-10-10 07:50:00</field>
+	<field name="value">EKCH 100750Z 30005KT 240V350 9999 FEW020 09/03 Q1021 NOSIG</field>
+	<field name="value">9</field>
+	<field name="value">3</field>
+	<field name="value">1021</field>
+  </row>
+
+  <row>
+	<field name="observed">2004-10-10 08:20:00</field>
+	<field name="value">EKCH 100820Z 30006KT 270V330 9999 FEW020 10/03 Q1021 NOSIG</field>
+	<field name="value">10</field>
+	<field name="value">3</field>
+	<field name="value">1021</field>
+  </row>
+
+  <row>
+	<field name="observed">2004-10-10 08:50:00</field>
+	<field name="value">EKCH 100850Z 35010KT 310V010 9999 FEW020 10/03 Q1021 NOSIG</field>
+	<field name="value">10</field>
+	<field name="value">3</field>
+	<field name="value">1021</field>
+  </row>
+
+  <row>
+	<field name="observed">2004-10-10 09:20:00</field>
+	<field name="value">EKCH 100920Z 01012KT 9999 FEW020 10/04 Q1021 NOSIG</field>
+	<field name="value">10</field>
+	<field name="value">4</field>
+	<field name="value">1021</field>
+  </row>
+
+  <row>
+	<field name="observed">2004-10-10 09:50:00</field>
+	<field name="value">EKCH 100950Z 02010KT 9999 FEW020 10/04 Q1021 NOSIG</field>
+	<field name="value">10</field>
+	<field name="value">4</field>
+	<field name="value">1021</field>
+  </row>
+
+  <row>
+	<field name="observed">2012-09-21 15:50:00</field>
+	<field name="value">EKCH 211550Z 18015KT 9999 FEW042 BKN065 14/09 Q1011 NOSIG</field>
+	<field name="value">14</field>
+	<field name="value">9</field>
+	<field name="value">1011</field>
+  </row>
+
+  <row>
+	<field name="observed">2012-09-21 16:20:00</field>
+	<field name="value">EKCH 211620Z 20018KT 9999 -RA FEW042 BKN070 14/08 Q1011 NOSIG</field>
+	<field name="value">14</field>
+	<field name="value">8</field>
+	<field name="value">1011</field>
+  </row>
+
+  <row>
+	<field name="observed">2012-09-21 16:50:00</field>
+	<field name="value">EKCH 211650Z 20016KT CAVOK 14/07 Q1011 NOSIG</field>
+	<field name="value">14</field>
+	<field name="value">7</field>
+	<field name="value">1011</field>
+  </row>
+
+  <row>
+	<field name="observed">2012-09-21 17:20:00</field>
+	<field name="value">EKCH 211720Z 20019KT 9999 -RA NSC 14/08 Q1011 NOSIG</field>
+	<field name="value">14</field>
+	<field name="value">8</field>
+	<field name="value">1011</field>
+  </row>
+
+  <row>
+	<field name="observed">2012-09-21 17:50:00</field>
+	<field name="value">EKCH 211750Z 19019KT CAVOK 14/07 Q1011 NOSIG</field>
+	<field name="value">14</field>
+	<field name="value">7</field>
+	<field name="value">1011</field>
+  </row>
+</resultset>
