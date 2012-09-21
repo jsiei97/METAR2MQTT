@@ -7,27 +7,27 @@ Move and parse METAR data from weather.noaa.gov and publish it in your MQTT serv
 About METAR 
 ===========
 
-http://en.wikipedia.org/wiki/METAR
-http://www.wunderground.com/metarFAQ.asp
+* http://en.wikipedia.org/wiki/METAR
+* http://www.wunderground.com/metarFAQ.asp
 
 
 Locate a station 
 ================
 
-http://www.nws.noaa.gov/tg/siteloc.shtml
+* http://www.nws.noaa.gov/tg/siteloc.shtml
 
 
 Examples 
 ========
 
 Koebenhavn / Kastrup / EKCH
-http://weather.noaa.gov/pub/data/observations/metar/stations/EKCH.TXT
+* http://weather.noaa.gov/pub/data/observations/metar/stations/EKCH.TXT
 
 Malmo / Sturup / ESMS
-http://weather.noaa.gov/pub/data/observations/metar/stations/ESMS.TXT
+* http://weather.noaa.gov/pub/data/observations/metar/stations/ESMS.TXT
 
 Kristianstad / Everod / ESMK 	  	
-http://weather.noaa.gov/pub/data/observations/metar/stations/ESMK.TXT
+* http://weather.noaa.gov/pub/data/observations/metar/stations/ESMK.TXT
 
 
 Testdata 
