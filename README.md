@@ -41,3 +41,11 @@ if we look at EKCH we have data from
 2004-10-10 07:50:00 up to 2012-09-21 17:50:00 saved every 30min.
 So I think it is 135097 data points.
 
+
+METAR Decoder Software Package Library
+======================================
+
+* http://limulus.net/mdsplib/
+* http://mdsplib.sourceforge.net/
+* https://sourceforge.net/projects/mdsplib/
+
