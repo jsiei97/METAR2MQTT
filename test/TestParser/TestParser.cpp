@@ -28,16 +28,10 @@ class TestParser : public QObject
 
             void test_MtoInt_data();
             void test_MtoInt();
-};
 
-/*
- * @todo Make sure he complains about this metars since they are tricky
- * ESMK 190720Z 25010KT 9999 BKN030 04/02 Q01000
- * ESMK 020620Z 27005KT CAVOK 070/M01 Q1032
- * ESMS 241350Z 08027G37KT CAVOK 10/01 Q10
- * ESMS 091020Z 29020KT 9999 FEW013 SCT015 BKN022 09/07 Q100
- * ESMS 110450Z 21010KT 6000 -SHRA SCT005 BKN007 09/09 Q09
- */
+            void testBadData_data();
+            void testBadData();
+};
 
 
 bool TestParser::testParseMETAR(
@@ -221,5 +215,30 @@ void TestParser::test_MtoInt()
 
 }
 
+void TestParser::testBadData_data()
+{
+    QTest::addColumn<QString>("data");
+
+    //Make sure he complains about this metars since they are tricky
+    QTest::newRow("Faulty METAR 01") << "ESMK 190720Z 25010KT 9999 BKN030 04/02 Q01000";
+    QTest::newRow("Faulty METAR 02") << "ESMK 020620Z 27005KT CAVOK 070/M01 Q1032";
+    QTest::newRow("Faulty METAR 03") << "ESMS 241350Z 08027G37KT CAVOK 10/01 Q10";
+    QTest::newRow("Faulty METAR 04") << "ESMS 091020Z 29020KT 9999 FEW013 SCT015 BKN022 09/07 Q100";
+    QTest::newRow("Faulty METAR 05") << "ESMS 110450Z 21010KT 6000 -SHRA SCT005 BKN007 09/09 Q09";
+}
+void TestParser::testBadData()
+{
+    QFETCH(QString, data);
+
+    METAR metar;
+
+    metar.init();
+    if(metar.parse(data))
+    {
+        qDebug() << data;
+        QFAIL("Error this data is NOT ok, we should not get true back!");
+    }
+
+}
 QTEST_MAIN(TestParser)
 #include "TestParser.moc"

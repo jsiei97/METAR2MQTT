@@ -42,7 +42,7 @@ bool METAR::parse(QString metarData)
     //qDebug() << metarData;
 
     //QRegExp rxMETAR("([A-Z]{4,4}) ([0-9]{6,6}Z).*([0-9A-Z]{5,8}KT).*([M0-9]{2,3})/([M0-9]{2,3}) Q([0-9]{4,4})");
-    QRegExp rxMETAR("([A-Z]{4,4}) ([0-9]{6,6}Z).*(M{0,1}[0-9]{1,2})/(M{0,1}[0-9]{1,2}) Q([0-9]{3,4})");
+    QRegExp rxMETAR("([A-Z]{4,4}) ([0-9]{6,6}Z).* (M{0,1}[0-9]{1,2})/(M{0,1}[0-9]{1,2}) Q([0-9]{3,4})");
 
     // Note 1. std tells us QXXXX but sometimes it is only 2-3digits (QXXX)
     // Note 2. std tells us (M)XX/(M)XX but sometimes we get (M)X/(M)X
