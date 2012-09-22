@@ -12,5 +12,4 @@ SOURCES += TestParser.cpp
 # Code to test
 DEPENDPATH  += ../../src/
 INCLUDEPATH += ../../src/
-#SOURCES += ConfigParse.cpp
-#SOURCES += Sensor.cpp
+SOURCES += metar.cpp

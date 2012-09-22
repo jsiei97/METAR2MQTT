@@ -7,6 +7,7 @@
 #include <QDomElement>
 #include <QDomNode>
 
+#include "metar.h"
 
 class TestParser : public QObject
 {
@@ -14,11 +15,95 @@ class TestParser : public QObject
 
     private:
     public:
+        bool testParseMETAR(
+                QString metarData,
+                QString date,
+                QString temperature,
+                QString dewpoint,
+                QString barometricPressure);
 
-    private slots:
-        void testParseFile_data();
-        void testParseFile();
+        private slots:
+            void testParseFile_data();
+            void testParseFile();
+
+            void test_MtoInt_data();
+            void test_MtoInt();
 };
+
+/*
+ * @todo Make sure he complains about this metars since they are tricky
+ * ESMK 190720Z 25010KT 9999 BKN030 04/02 Q01000
+ * ESMK 020620Z 27005KT CAVOK 070/M01 Q1032
+ * ESMS 241350Z 08027G37KT CAVOK 10/01 Q10
+ * ESMS 091020Z 29020KT 9999 FEW013 SCT015 BKN022 09/07 Q100
+ * ESMS 110450Z 21010KT 6000 -SHRA SCT005 BKN007 09/09 Q09
+ */
+
+
+bool TestParser::testParseMETAR(
+        QString metarData,
+        QString date,
+        QString temperature,
+        QString dewpoint,
+        QString barometricPressure)
+{
+    /*
+       qDebug() << date
+       << metarData
+       << temperature
+       << dewpoint
+       << barometricPressure;
+       */
+
+    METAR metar;
+    metar.init();
+    if(!metar.parse(metarData))
+    {
+        qDebug() << "metar parse failed"
+            << date
+            << metarData
+            << temperature
+            << dewpoint
+            << barometricPressure;
+        return false;
+    }
+
+    if( metar.temperature != temperature.toInt())
+    {
+        qDebug() << "temperature fail"
+            << date
+            << metarData
+            << temperature
+            << dewpoint
+            << barometricPressure;
+        return false;
+    }
+
+    if(metar.dewpoint != dewpoint.toInt())
+    {
+        qDebug() << "dewpoint fail"
+            << date
+            << metarData
+            << temperature
+            << dewpoint
+            << barometricPressure;
+        return false;
+    }
+
+    if(metar.barometricPressure != barometricPressure.toInt())
+    {
+        qDebug() << "barometricPressure fail"
+            << date
+            << metarData
+            << temperature
+            << dewpoint
+            << barometricPressure;
+        return false;
+    }
+
+    return true;
+}
+
 
 void TestParser::testParseFile_data()
 {
@@ -73,21 +158,21 @@ void TestParser::testParseFile()
                 QDomNodeList tagId = e.elementsByTagName("field");
 
                 /*
-                for(int i=0; i<tagId.count(); i++)
-                {
-                    QDomElement tagE = tagId.at(i).toElement();
-                    qDebug() << qPrintable(tagE.tagName()) << tagE.text();
-                }
-                */
+                   for(int i=0; i<tagId.count(); i++)
+                   {
+                   QDomElement tagE = tagId.at(i).toElement();
+                   qDebug() << qPrintable(tagE.tagName()) << tagE.text();
+                   }
+                   */
                 QCOMPARE(tagId.count(), 5);
 
                 /*
-                qDebug() << tagId.at(0).toElement().text()
-                    << tagId.at(1).toElement().text()
-                    << tagId.at(2).toElement().text()
-                    << tagId.at(3).toElement().text()
-                    << tagId.at(4).toElement().text();
-                    */
+                   qDebug() << tagId.at(0).toElement().text()
+                   << tagId.at(1).toElement().text()
+                   << tagId.at(2).toElement().text()
+                   << tagId.at(3).toElement().text()
+                   << tagId.at(4).toElement().text();
+                   */
 
                 // This is the test input for the parser
                 // 0 => date
@@ -95,7 +180,13 @@ void TestParser::testParseFile()
                 // 2 => temperature
                 // 3 => dewpoint
                 // 4 => airpressure
-                
+
+                QVERIFY(testParseMETAR(
+                            tagId.at(1).toElement().text(),
+                            tagId.at(0).toElement().text(),
+                            tagId.at(2).toElement().text(),
+                            tagId.at(3).toElement().text(),
+                            tagId.at(4).toElement().text()));
 
 
             }
@@ -103,6 +194,30 @@ void TestParser::testParseFile()
         }
     }
 
+
+}
+
+void TestParser::test_MtoInt_data()
+{
+    QTest::addColumn<QString>("data");
+    QTest::addColumn<int>("temperature");
+
+    QTest::newRow("Value 14") << "14" << 14;
+    QTest::newRow("Value 50") << "50" << 50;
+    QTest::newRow("Value 03") << "03" <<  3;
+
+    QTest::newRow("Neg 14") << "M14" << -14;
+    QTest::newRow("Neg 50") << "M50" << -50;
+    QTest::newRow("Neg 03") << "M03" <<  -3;
+}
+void TestParser::test_MtoInt()
+{
+    QFETCH(QString, data);
+    QFETCH(int, temperature);
+
+    METAR metar;
+
+    QCOMPARE(temperature, metar.MtoInt(data));
 
 }
 
