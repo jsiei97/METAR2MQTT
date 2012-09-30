@@ -15,7 +15,7 @@ class TestMosq : public QObject
 
 void TestMosq::testMosqPub()
 {
-    
+    /// @todo Shall I change the Mosq code into the signal slot model so it becomes testable...
 
 
 }
