@@ -1,0 +1,9 @@
+<config>
+    <mqtt_server> localhost </mqtt_server>
+    <mqtt_appname> FunTechHouse_METAR2MQTT2__01 </mqtt_appname>
+
+    <station name="EKCH">
+        <topic> METAR/EKCH </topic>
+    </station>
+
+</config>
