@@ -4,7 +4,8 @@
 
 #include "Station.h"
 #include "ConfigParse.h"
-//#include "MosqConnect.h"
+#include "MosqConnect.h"
+#include "metar.h"
 
 void print_usage()
 {
@@ -116,27 +117,55 @@ int main(int argc, char *argv[])
         qDebug() << "";
     }
 
-/*
 	class MosqConnect *mqtt;
 	int rc;
 
 	mosqpp::lib_init();
 
 	mqtt = new MosqConnect(
-            config.getMqttAppName().toAscii(), 
-            config.getMqttServer().toAscii(), 
-            1883, 
+           config.getAppName().toAscii(), 
+           config.getMosqServer().toAscii(), 
+            1883,
             list
             );
-	
-	while(1){
-		rc = mqtt->loop();
-		if(rc){
+
+	while(1)
+    {
+        rc = mqtt->loop();
+		if(rc)
+        {
+            qDebug() << "reconnect" << rc;
 			mqtt->reconnect();
 		}
+
+        for(int i=0; i<list->size(); i++)
+        {
+            Station station = list->at(i);
+            if(verbose > 0)
+            {
+                qDebug() << station.getName();
+            }
+            QString metarData = "";
+            /// @todo Impl curl get data from server 
+            //QString metarData = ...getMetarDataFromServer(station.getName();
+            if(metarData.size() > 0)
+            {
+                METAR metar;
+                metar.init();
+                if(!metar.parse(metarData))
+                {
+                    /// @todo Fill pub string will data from the parser
+                    //QString mess("temperature=%1 dewpoint=%2").arg(metar.getTemperature()).arg(metar.getDewpoint());
+                    //mqtt->publishData( station.getMosqTopic(), mess);
+                }
+            }
+        }
+
+        //sleep 20min
+        sleep(1);
+
 	}
 
 	mosqpp::lib_cleanup();
-*/
 
 }
